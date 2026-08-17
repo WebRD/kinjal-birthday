@@ -84,7 +84,7 @@ export const CONTENT = {
     note: "I could have just said it. But you deserve more than a message, so I built you a little journey instead. Take your time with it.", // EDIT
     cta: "Take a walk with me",
     // The one big framed photo. Any file from any chapter folder.
-    photo: "first-screen-photo.JPG", // EDIT
+    photo: "first.png", // EDIT
   },
 
   /* -- SCENE 3 . Our story --------------------------------- */

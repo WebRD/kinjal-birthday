@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1a0b2e">
+<title>Happy Birthday, Kinjal ♥</title>
+<meta name="description" content="A little journey, made just for you.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=Caveat:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/scenes.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎂</text></svg>">
+</head>
+<body>
+
+<!-- ══ Ambient layers, always present behind every scene ══ -->
+<canvas id="bokeh-canvas" class="fx-layer" aria-hidden="true"></canvas>
+<canvas id="fx-canvas" class="fx-layer fx-layer--top" aria-hidden="true"></canvas>
+<div class="vignette" aria-hidden="true"></div>
+
+<noscript>
+  <div class="noscript-note">
+    <h1>Happy Birthday, Kinjal ♥</h1>
+    <p>This page needs JavaScript enabled to show you your surprise.</p>
+  </div>
+</noscript>
+
+<main id="stage" class="stage">
+
+  <!-- ═══════════ SCENE 0 · PRELOADER ═══════════ -->
+  <section class="scene scene--preloader is-mounted is-active" data-scene="preloader" aria-label="Loading">
+    <div class="preloader">
+      <svg class="preloader__heart" viewBox="0 0 100 90" aria-hidden="true">
+        <defs>
+          <clipPath id="heart-clip">
+            <path d="M50 88C20 66 2 48 2 28 2 13 13 2 27 2c9 0 17 4 23 12C56 6 64 2 73 2c14 0 25 11 25 26 0 20-18 38-48 60Z"/>
+          </clipPath>
+        </defs>
+        <path class="preloader__outline"
+              d="M50 88C20 66 2 48 2 28 2 13 13 2 27 2c9 0 17 4 23 12C56 6 64 2 73 2c14 0 25 11 25 26 0 20-18 38-48 60Z"/>
+        <g clip-path="url(#heart-clip)">
+          <rect id="preloader-fill" class="preloader__fill" x="0" y="90" width="100" height="90"/>
+        </g>
+      </svg>
+      <p class="preloader__text">getting something ready for you…</p>
+    </div>
+  </section>
+
+  <!-- ═══════════ SCENE 0.5 · COUNTDOWN (only before the reveal date) ═══════════ -->
+  <section class="scene scene--countdown" data-scene="countdown" aria-label="Countdown to the big day">
+    <div class="spotlight" aria-hidden="true"></div>
+
+    <div class="scene__inner countdown">
+      <p class="countdown__eyebrow" data-content="reveal.eyebrow"></p>
+      <h1 class="countdown__name script" data-content="name">Kinjal</h1>
+
+      <div class="ornament" aria-hidden="true">
+        <span class="ornament__rule"></span>
+        <span class="ornament__mark">&hearts;</span>
+        <span class="ornament__rule"></span>
+      </div>
+
+      <p class="countdown__lead" id="countdown-lead" data-content="reveal.lead"></p>
+
+      <div class="clock" id="countdown-clock" aria-hidden="true"></div>
+      <p class="sr-only" id="countdown-sr"></p>
+
+      <p class="countdown__date" id="countdown-date"></p>
+
+      <div class="giftbox giftbox--locked" id="countdown-box" role="button" tabindex="0"
+           aria-label="Still locked">
+        <div class="giftbox__lid"><span class="giftbox__bow"></span></div>
+        <div class="giftbox__body"><span class="giftbox__ribbon"></span></div>
+        <span class="giftbox__lock" aria-hidden="true"></span>
+      </div>
+
+      <p class="countdown__peek" id="countdown-peek" aria-live="polite"></p>
+      <p class="countdown__hint" data-content="reveal.hint"></p>
+    </div>
+  </section>
+
+  <!-- ═══════════ SCENE 1 · LANDING ═══════════ -->
+  <section class="scene scene--landing" data-scene="landing" aria-label="Welcome">
+    <div class="balloons" aria-hidden="true"></div>
+
+    <div class="spotlight" aria-hidden="true"></div>
+
+    <div class="scene__inner landing">
+      <h1 class="landing__name script" data-content="name">Kinjal</h1>
+
+      <div class="ornament" aria-hidden="true">
+        <span class="ornament__rule"></span>
+        <span class="ornament__mark">&hearts;</span>
+        <span class="ornament__rule"></span>
+      </div>
+
+      <p class="landing__tagline" data-content="landing.tagline"></p>
+
+      <div class="giftbox" id="giftbox" aria-hidden="true">
+        <div class="giftbox__glow"></div>
+        <div class="giftbox__lid"><span class="giftbox__bow"></span></div>
+        <div class="giftbox__body"><span class="giftbox__ribbon"></span></div>
+      </div>
+
+      <button class="btn btn--hero" id="btn-open-gift" type="button">
+        <span data-content="landing.cta">Open Your Surprise</span> <span aria-hidden="true">🎁</span>
+      </button>
+      <p class="landing__hint" data-content="landing.hint"></p>
+      <p class="landing__note is-hidden" id="landing-note"></p>
+    </div>
+  </section>
+
+  <!-- ═══════════ SCENE 2 · THE WISH ═══════════ -->
+  <section class="scene scene--wish" data-scene="wish" aria-label="Birthday wish">
+    <div class="scene__inner wish">
+      <h2 class="wish__title script" id="wish-typewriter" aria-live="polite"></h2>
+      <p class="wish__sub reveal-delayed" data-content="wish.subtitle"></p>
+
+      <figure class="frame frame--ornate reveal-delayed reveal-delayed--2">
+        <div class="frame__inner" data-photo="hero"></div>
+        <span class="frame__sheen" aria-hidden="true"></span>
+      </figure>
+
+      <p class="wish__note reveal-delayed reveal-delayed--3" data-content="wish.note"></p>
+
+      <button class="btn reveal-delayed reveal-delayed--3" data-next type="button">
+        <span data-content="wish.cta">Take a walk with me</span> <span aria-hidden="true">→</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ═══════════ SCENE 3 · OUR STORY ═══════════ -->
+  <section class="scene scene--story" data-scene="story" aria-label="Our story">
+    <div class="scene__inner scene__inner--scroll story">
+      <header class="scene-head">
+        <p class="scene-head__eyebrow" data-content="story.eyebrow"></p>
+        <h2 class="scene-head__title" data-content="story.title"></h2>
+        <p class="scene-head__sub" data-content="story.subtitle"></p>
+      </header>
+
+      <ol class="timeline" id="timeline"></ol>
+
+      <div class="scene-foot">
+        <button class="btn" data-next type="button">
+          <span data-content="story.cta">But here's why I love you</span> <span aria-hidden="true">→</span>
+        </button>
+      </div>
+      <div class="scroll-cue" aria-hidden="true"><span></span></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SCENE 4 · REASONS I LOVE YOU ═══════════ -->
+  <section class="scene scene--reasons" data-scene="reasons" aria-label="Reasons I love you">
+    <div class="scene__inner scene__inner--scroll reasons">
+      <header class="scene-head">
+        <p class="scene-head__eyebrow" data-content="reasons.eyebrow"></p>
+        <h2 class="scene-head__title" data-content="reasons.title"></h2>
+        <p class="scene-head__sub" data-content="reasons.subtitle"></p>
+      </header>
+
+      <p class="reasons__counter" id="reasons-counter" aria-live="polite"></p>
+      <div class="reasons__grid" id="reasons-grid"></div>
+
+      <div class="scene-foot">
+        <button class="btn is-locked" id="btn-reasons-next" data-next type="button" disabled>
+          <span data-content="reasons.cta">Continue</span> <span aria-hidden="true">→</span>
+        </button>
+        <button class="link-btn" id="btn-reasons-skip" type="button" data-content="reasons.skip"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SCENE 5 · MAKE A WISH ═══════════ -->
+  <section class="scene scene--cake" data-scene="cake" aria-label="Make a wish">
+    <div class="cake-glow" aria-hidden="true"></div>
+    <div class="scene__inner cake-scene">
+      <header class="scene-head">
+        <h2 class="scene-head__title" data-content="cake.title"></h2>
+        <p class="scene-head__sub" id="cake-prompt" aria-live="polite"></p>
+      </header>
+
+      <div class="cake" id="cake">
+        <div class="cake__candles" id="cake-candles"></div>
+        <div class="cake__top"><span class="cake__cherry" aria-hidden="true"></span></div>
+        <div class="cake__tier cake__tier--1">
+          <span class="cake__drip"></span>
+          <span class="cake__icing script" id="cake-icing"></span>
+        </div>
+        <div class="cake__tier cake__tier--2">
+          <span class="cake__drip"></span>
+          <span class="cake__sprinkles" id="cake-sprinkles" aria-hidden="true"></span>
+        </div>
+        <div class="cake__plate"></div>
+      </div>
+
+      <div class="cake__controls">
+        <button class="link-btn" id="btn-mic" type="button" data-content="cake.micCta"></button>
+        <span class="mic-status" id="mic-status" aria-live="polite"></span>
+      </div>
+
+      <p class="cake__afterword" id="cake-afterword"></p>
+      <button class="btn is-hidden" id="btn-cake-next" data-next type="button">
+        <span data-content="cake.cta">Continue</span> <span aria-hidden="true">→</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ═══════════ SCENE 6 · THE LETTER ═══════════ -->
+  <section class="scene scene--letter" data-scene="letter" aria-label="A letter for you">
+    <div class="scene__inner scene__inner--scroll letter-scene">
+      <header class="scene-head">
+        <h2 class="scene-head__title" data-content="letter.title"></h2>
+        <p class="scene-head__sub" id="letter-prompt" data-content="letter.prompt"></p>
+      </header>
+
+      <div class="envelope" id="envelope" role="button" tabindex="0"
+           aria-label="Open the letter">
+        <div class="envelope__back"></div>
+        <div class="envelope__letter" id="envelope-letter"></div>
+        <div class="envelope__front"></div>
+        <div class="envelope__flap"></div>
+        <div class="envelope__seal" id="envelope-seal" aria-hidden="true">♥</div>
+      </div>
+
+      <article class="letter-paper is-hidden" id="letter-paper">
+        <div class="letter-paper__body" id="letter-body"></div>
+        <p class="letter-paper__sign" id="letter-sign"></p>
+      </article>
+
+      <div class="scene-foot">
+        <button class="btn is-hidden" id="btn-letter-next" data-next type="button">
+          <span data-content="letter.cta">One more thing…</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SCENE 7 · FINALE ═══════════ -->
+  <section class="scene scene--finale" data-scene="finale" aria-label="Happy birthday">
+    <div class="scene__inner scene__inner--scroll finale">
+      <div class="mosaic" id="mosaic" aria-hidden="true"></div>
+
+      <div class="finale__content">
+        <span class="monogram" id="monogram" aria-hidden="true"></span>
+        <h2 class="finale__title script" data-content="finale.title"></h2>
+        <p class="finale__message" data-content="finale.message"></p>
+        <p class="finale__sign" data-content="finale.sign"></p>
+
+        <div class="scene-foot">
+          <button class="btn btn--ghost" id="btn-replay" type="button">
+            <span data-content="finale.replay">Replay the journey</span> <span aria-hidden="true">↺</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <button class="easter-egg" id="easter-egg" type="button" aria-label="A hidden surprise">♡</button>
+  </section>
+
+</main>
+
+<!-- ═══════════ EASTER EGG MODAL ═══════════ -->
+<div class="modal" id="egg-modal" role="dialog" aria-modal="true" aria-labelledby="egg-title" hidden>
+  <div class="modal__backdrop" data-close-modal></div>
+  <div class="modal__panel">
+    <button class="modal__close" type="button" data-close-modal aria-label="Close">×</button>
+    <h3 class="modal__title" id="egg-title"></h3>
+    <p class="modal__sub" id="egg-sub"></p>
+    <ul class="modal__list" id="egg-list"></ul>
+  </div>
+</div>
+
+<!-- ═══════════ PROGRESS TRAIL ═══════════ -->
+<nav class="trail" id="trail" aria-label="Journey progress"></nav>
+
+<!-- ═══════════ MUSIC TOGGLE (only appears if a track exists) ═══════════ -->
+<button class="music-toggle is-hidden" id="music-toggle" type="button"
+        aria-label="Toggle background music" aria-pressed="false">
+  <span class="music-toggle__icon" aria-hidden="true"></span>
+</button>
+<p class="music-credit is-hidden" id="music-credit"></p>
+<audio id="music" loop preload="none"></audio>
+
+<script type="module" src="js/journey.js"></script>
+</body>
+</html>
